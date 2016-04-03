@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <script src="/js/jquery-2.2.2.min.js"></script>
