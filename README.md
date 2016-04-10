@@ -1,10 +1,10 @@
 # fritz-dect-php
 
-scripts to control AVM Fritz!DECT 200 devices
+scripts to control AVM FRITZ!DECT 200 devices
 
 ## usage
 
-to use these scripts update the `login.inc.php` to meet your Fritz!Box login
+to use these scripts update the `login.inc.php` to meet your FRITZ!Box login
 
 ## interface
 
