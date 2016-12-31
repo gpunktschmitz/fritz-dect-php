@@ -32,7 +32,7 @@ foreach($devicesXML->device as $device) {
 	$arr['name'] = $device->name->__toString();
 	$arr['id'] = ++$counter;
 	$arr['state'] = $device->switch->state->__toString();
-	$arr['identifier'] = str_replace(" ", '', $device[identifier]->__toString());
+	$arr['identifier'] = str_replace(" ", '', $device['identifier']->__toString());
 	if($arr['state']) {
 		$arr['switch_state'] = ' checked="checked"';
 	} else {
@@ -47,7 +47,8 @@ $logout = file_get_contents('http://fritz.box/login.lua?page=/home/home.lua&logo
 <!DOCTYPE html>
 <html>
 <head>
-<script src="/js/jquery-2.2.2.min.js"></script>
+<script src="js/jquery-2.2.2.min.js"></script>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 <style>
 body {
   font-family: sans;
@@ -171,7 +172,7 @@ table {
 }
 
 #content {
-  width: 700px;
+  width: 75%;
   margin: auto;
   text-align: center;
 }
@@ -189,8 +190,10 @@ table {
 <?php foreach($outputDevicesArray as $deviceArray) { ?>
 $("#switch<?php echo $deviceArray['id']?>").click( function(){
     var ain = $(this).attr('ain');
-	if($(this).is(':checked')){$.get("switchOn.php?ain="+ain)};
-	if(!$(this).is(':checked')){$.get("switchOff.php?ain="+ain)};
+	if($(this).is(':checked')){$.get("switchOn.php?ain="+ain)
+		};
+	if(!$(this).is(':checked')){$.get("switchOff.php?ain="+ain)
+		};
 });
 <?php } ?>
 </script>
