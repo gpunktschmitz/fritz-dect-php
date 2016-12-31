@@ -190,10 +190,8 @@ table {
 <?php foreach($outputDevicesArray as $deviceArray) { ?>
 $("#switch<?php echo $deviceArray['id']?>").click( function(){
     var ain = $(this).attr('ain');
-	if($(this).is(':checked')){$.get("switchOn.php?ain="+ain)
-		};
-	if(!$(this).is(':checked')){$.get("switchOff.php?ain="+ain)
-		};
+	if($(this).is(':checked')){$.get("switchOn.php?ain="+ain)};
+	if(!$(this).is(':checked')){$.get("switchOff.php?ain="+ain)};
 });
 <?php } ?>
 </script>
