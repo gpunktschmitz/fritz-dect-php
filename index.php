@@ -67,8 +67,8 @@ table {
 #switch<?php echo $deviceArray['id'] ?> {
   visibility: hidden;
   clip: rect(0 0 0 0);
-  position: absolute;
-  left: 9999px;
+  /*position: absolute;
+  left: 9999px;*/
 }
 
 #switch<?php echo $deviceArray['id'] ?>:checked ~ .switch {
