@@ -11,3 +11,8 @@ to use these scripts update the `login.inc.php` to meet your FRITZ!Box login
 each DECT device is presented with its name and a switch to turn it on or off
 
 ![fritz_dect_php_page](https://cloud.githubusercontent.com/assets/727316/14409527/f6ca624e-ff15-11e5-8add-87f2eaf5eedf.png)
+
+## resources
+
+* https://avm.de/fileadmin/user_upload/Global/Service/Schnittstellen/AHA-HTTP-Interface.pdf
+* https://avm.de/fileadmin/user_upload/Global/Service/Schnittstellen/AVM_Technical_Note_-_Session_ID.pdf
