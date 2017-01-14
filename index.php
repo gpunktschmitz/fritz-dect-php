@@ -23,37 +23,29 @@ if($session_status_simplexml->SID != '0000000000000000') {
 }
 curl_close($ch);
 
-$devicesXML = simplexml_load_string(file_get_contents('http://fritz.box/webservices/homeautoswitch.lua?switchcmd=getdevicelistinfos&sid='.$SID));
-
 $outputDevicesArray = Array();
 $counter = 0;
-if(empty($devicesXML)) {
-	$devicesList = rtrim(file_get_contents('http://fritz.box/webservices/homeautoswitch.lua?switchcmd=getswitchlist&sid='.$SID));
-	$devicesArray = explode(',',$devicesList);
-	foreach($devicesArray as $device) {
+
+$devicesList = rtrim(file_get_contents('http://fritz.box/webservices/homeautoswitch.lua?switchcmd=getswitchlist&sid='.$SID));
+$devicesArray = explode(',',$devicesList);
+foreach($devicesArray as $device) {
+	$switchPresent = intval(rtrim(file_get_contents('http://fritz.box/webservices/homeautoswitch.lua?switchcmd=getswitchpresent&ain='.$device.'&sid='.$SID)));
+	if($switchPresent) {
 		$arr = Array();
 		$arr['name'] = rtrim(file_get_contents('http://fritz.box/webservices/homeautoswitch.lua?switchcmd=getswitchname&ain='.$device.'&sid='.$SID));
 		$arr['id'] = ++$counter;
 		$arr['identifier'] = $device;
 		$arr['state'] = rtrim(file_get_contents('http://fritz.box/webservices/homeautoswitch.lua?switchcmd=getswitchstate&ain='.$device.'&sid='.$SID));
-		if($arr['state']) {
-			$arr['switch_state'] = ' checked="checked"';
-		} else {
-			$arr['switch_state'] = '';
-		}
-		$outputDevicesArray[] = $arr;
-	}
-} else {
-	foreach($devicesXML->device as $device) {
-		$arr = Array();
-		$arr['name'] = $device->name->__toString();
-		$arr['id'] = ++$counter;
-		$arr['identifier'] = str_replace(" ", '', $device[identifier]->__toString());
-		$arr['state'] = $device->switch->state->__toString();
-		if($arr['state']) {
-			$arr['switch_state'] = ' checked="checked"';
-		} else {
-			$arr['switch_state'] = '';
+		switch($arr['state']) {
+			case "1":
+				$arr['switch_state'] = ' checked="checked"';
+				break;
+			case "0":
+				$arr['switch_state'] = '';
+				break;
+			default:
+				$arr['switch_state'] = ' disabled="disabled"';
+				break;
 		}
 		$outputDevicesArray[] = $arr;
 	}
